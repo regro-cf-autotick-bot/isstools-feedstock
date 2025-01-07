@@ -11,17 +11,17 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 1
+  number: 2
   noarch: python
   script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 
 requirements:
-  build:
-    - python >=3.6
+  host:
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - matplotlib-base
     - netcdf4
     - numexpr
@@ -31,6 +31,8 @@ requirements:
     - xas
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - isstools
 
